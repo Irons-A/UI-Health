@@ -33,6 +33,7 @@ public class HealthbarSmooth : MonoBehaviour
     public void SetHealth(float currenHealth)
     {
         _currentHealth = currenHealth;
+        StopCoroutine(HealthDisplayingRoutine());
         StartCoroutine(HealthDisplayingRoutine());
     }
 }

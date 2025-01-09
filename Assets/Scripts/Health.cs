@@ -45,7 +45,6 @@ public class Health : MonoBehaviour
         _currentHealth -= _damageAmount;
 
         DisplayHealth();
-        Debug.Log(_currentHealth / _maxHealth);
     }
 
     public void Heal()
