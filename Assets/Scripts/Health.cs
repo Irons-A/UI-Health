@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +10,8 @@ public class Health : MonoBehaviour
     [SerializeField] private float _healingAmount = 10;
 
     [SerializeField] private HealthbarText _healthText;
-    [SerializeField] private HealthbarSlider _healthbarStandart;
-    [SerializeField] private HealthbarSlider _healthbarSmooth;
+    [SerializeField] private HealthbarStandart _healthbarStandart;
+    [SerializeField] private HealthbarSmooth _healthbarSmooth;
 
     [SerializeField] private Button _damageButton;
     [SerializeField] private Button _healButton;
@@ -28,8 +25,8 @@ public class Health : MonoBehaviour
     private void Start()
     {
         _healthText.SetMaxHealth(_maxHealth);
-        _healthbarStandart.SetStartParameters(_minHealth, _maxHealth);
-        _healthbarSmooth.SetStartParameters(_minHealth, _maxHealth);
+        _healthbarStandart.SetStartParameters(_maxHealth);
+        _healthbarSmooth.SetStartParameters(_maxHealth);
 
         DisplayHealth();
     }
@@ -48,6 +45,7 @@ public class Health : MonoBehaviour
         _currentHealth -= _damageAmount;
 
         DisplayHealth();
+        Debug.Log(_currentHealth / _maxHealth);
     }
 
     public void Heal()
