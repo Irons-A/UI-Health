@@ -9,6 +9,7 @@ public class HealthbarSmooth : MonoBehaviour
     private Slider _healthSlider;
     private float _currentHealth;
     private float _maxHealth;
+    private Coroutine _healthDisplayingRoutine;
 
     private void Awake()
     {
@@ -33,7 +34,12 @@ public class HealthbarSmooth : MonoBehaviour
     public void SetHealth(float currenHealth)
     {
         _currentHealth = currenHealth;
-        StopCoroutine(HealthDisplayingRoutine());
-        StartCoroutine(HealthDisplayingRoutine());
+
+        if (_healthDisplayingRoutine != null)
+        {
+            StopCoroutine(_healthDisplayingRoutine);
+        }
+
+        _healthDisplayingRoutine = StartCoroutine(HealthDisplayingRoutine());
     }
 }
