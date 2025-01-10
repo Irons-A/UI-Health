@@ -3,28 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class HealthbarSmooth : MonoBehaviour
+public class HealthbarSmooth : HealthbarStandart
 {
-    [SerializeField] private Health _health;
     [SerializeField] private float _recoveryRate = 0.5f;
 
-    private Slider _healthSlider;
     private Coroutine _healthDisplayingRoutine;
-
-    private void Awake()
-    {
-        _healthSlider = GetComponent<Slider>();
-    }
-
-    private void OnEnable()
-    {
-        _health.ValueChanged += DisplayHealth;
-    }
-
-    private void OnDisable()
-    {
-        _health.ValueChanged -= DisplayHealth;
-    }
 
     private IEnumerator HealthDisplayingRoutine(float health, float maxHealth)
     {
@@ -36,7 +19,7 @@ public class HealthbarSmooth : MonoBehaviour
         }
     }
 
-    public void DisplayHealth(float health, float maxHealth)
+    public override void DisplayHealth(float health, float maxHealth)
     {
         if (_healthDisplayingRoutine != null)
         {
