@@ -1,56 +1,42 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    public event Action<float, float> ValueChanged;
+
     [SerializeField] private float _minHealth = 0;
-    [SerializeField] private float _maxHealth = 100;
-    [SerializeField] private float _currentHealth = 100;
-    [SerializeField] private float _damageAmount = 10;
-    [SerializeField] private float _healingAmount = 10;
 
-    [SerializeField] private HealthbarText _healthText;
-    [SerializeField] private HealthbarStandart _healthbarStandart;
-    [SerializeField] private HealthbarSmooth _healthbarSmooth;
-
-    [SerializeField] private Button _damageButton;
-    [SerializeField] private Button _healButton;
-
-    private void Awake()
-    {
-        _damageButton.onClick.AddListener(TakeDamage);
-        _healButton.onClick.AddListener(Heal);
-    }
+    [field: SerializeField] public float CurrentHealth = 100;
+    [field: SerializeField] public float MaxHealth = 100;
 
     private void Start()
     {
-        _healthText.SetMaxHealth(_maxHealth);
-        _healthbarStandart.SetStartParameters(_maxHealth);
-        _healthbarSmooth.SetStartParameters(_maxHealth);
-
-        DisplayHealth();
+        ValueChanged?.Invoke(CurrentHealth, MaxHealth);
     }
 
-    private void DisplayHealth()
+    public void TakeDamage(float damageAmount)
     {
-        _currentHealth = Mathf.Clamp(_currentHealth, _minHealth, _maxHealth);
+        CurrentHealth -= damageAmount;
 
-        _healthText.SetHealth(_currentHealth);
-        _healthbarStandart.SetHealth(_currentHealth);
-        _healthbarSmooth.SetHealth(_currentHealth);
+        if (CurrentHealth < _minHealth)
+        {
+            CurrentHealth = _minHealth;
+        }
+
+        ValueChanged?.Invoke(CurrentHealth, MaxHealth);
     }
 
-    public void TakeDamage()
+    public void Heal(float healingAmount)
     {
-        _currentHealth -= _damageAmount;
+        CurrentHealth += healingAmount;
 
-        DisplayHealth();
-    }
+        if (CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        }
 
-    public void Heal()
-    {
-        _currentHealth += _healingAmount;
-
-        DisplayHealth();
+        ValueChanged?.Invoke(CurrentHealth, MaxHealth);
     }
 }

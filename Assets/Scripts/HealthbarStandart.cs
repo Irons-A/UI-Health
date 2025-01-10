@@ -3,21 +3,27 @@ using UnityEngine.UI;
 
 public class HealthbarStandart : MonoBehaviour
 {
+    [SerializeField] private Health _health;
+
     private Slider _healthSlider;
-    private float _maxHealth;
 
     private void Awake()
     {
         _healthSlider = GetComponent<Slider>();
     }
 
-    public void SetStartParameters(float maxHealth)
+    private void OnEnable()
     {
-        _maxHealth = maxHealth;
+        _health.ValueChanged += SetHealth;
     }
 
-    public void SetHealth(float currenHealth)
+    private void OnDisable()
     {
-        _healthSlider.value = currenHealth / _maxHealth;
+        _health.ValueChanged -= SetHealth;
+    }
+
+    public void SetHealth(float currenHealth, float maxHealth)
+    {
+        _healthSlider.value = currenHealth / maxHealth;
     }
 }

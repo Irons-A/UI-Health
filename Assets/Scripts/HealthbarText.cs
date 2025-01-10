@@ -3,21 +3,27 @@ using UnityEngine;
 
 public class HealthbarText : MonoBehaviour
 {
+    [SerializeField] private Health _health;
+
     private TMP_Text _healthText;
-    private float _maxHealth;
 
     private void Awake()
     {
         _healthText = GetComponent<TMP_Text>();
     }
 
-    public void SetMaxHealth(float maxHealth)
+    private void OnEnable()
     {
-        _maxHealth = maxHealth;
+        _health.ValueChanged += SetHealth;
     }
 
-    public void SetHealth(float health)
+    private void OnDisable()
     {
-        _healthText.text = ($"{health} / {_maxHealth}");
+        _health.ValueChanged -= SetHealth;
+    }
+
+    private void SetHealth(float health, float maxHealth)
+    {
+        _healthText.text = ($"{health} / {maxHealth}");
     }
 }
