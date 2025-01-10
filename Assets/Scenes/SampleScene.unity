@@ -882,8 +882,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minHealth: 0
-  CurrentHealth: 100
-  MaxHealth: 100
+  _currentHealth: 100
+  _maxHealth: 100
 --- !u!4 &745149320
 Transform:
   m_ObjectHideFlags: 0
@@ -1885,7 +1885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 745149319}
-  _recoveryRate: 0.3
+  _recoveryRate: 0.5
 --- !u!1 &2075277144
 GameObject:
   m_ObjectHideFlags: 0
