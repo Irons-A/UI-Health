@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthbarCore : MonoBehaviour
+public abstract class HealthbarCore : MonoBehaviour
 {
     [SerializeField] private Health _health;
 
@@ -16,8 +14,5 @@ public class HealthbarCore : MonoBehaviour
         _health.ValueChanged -= DisplayHealth;
     }
 
-    public virtual void DisplayHealth(float currenHealth, float maxHealth)
-    {
-
-    }
+    public abstract void DisplayHealth(float currenHealth, float maxHealth);
 }

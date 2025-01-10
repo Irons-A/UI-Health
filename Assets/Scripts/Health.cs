@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public event Action<float, float> ValueChanged;
-
     [SerializeField] private float _minHealth = 0;
     [SerializeField] private float _currentHealth = 100;
     [SerializeField] private float _maxHealth = 100;
+
+    public event Action<float, float> ValueChanged;
 
     private void Start()
     {
