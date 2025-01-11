@@ -11,7 +11,7 @@ public class HealthbarText : HealthbarCore
         _healthText = GetComponent<TMP_Text>();
     }
 
-    public override void DisplayHealth(float health, float maxHealth)
+    protected override void DisplayHealth(float health, float maxHealth)
     {
         _healthText.text = ($"{health} / {maxHealth}");
     }

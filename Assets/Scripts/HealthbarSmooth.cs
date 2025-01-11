@@ -11,15 +11,15 @@ public class HealthbarSmooth : HealthbarStandart
 
     private IEnumerator HealthDisplayingRoutine(float health, float maxHealth)
     {
-        while (_healthSlider.value != health / maxHealth)
+        while (HealthSlider.value != health / maxHealth)
         {
-            _healthSlider.value = Mathf.MoveTowards(_healthSlider.value, health / maxHealth, _recoveryRate * Time.deltaTime);
+            HealthSlider.value = Mathf.MoveTowards(HealthSlider.value, health / maxHealth, _recoveryRate * Time.deltaTime);
 
             yield return null;
         }
     }
 
-    public override void DisplayHealth(float health, float maxHealth)
+    protected override void DisplayHealth(float health, float maxHealth)
     {
         if (_healthDisplayingRoutine != null)
         {

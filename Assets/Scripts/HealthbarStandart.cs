@@ -1,18 +1,19 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
 public class HealthbarStandart : HealthbarCore
 {
-    public Slider _healthSlider;
+    [field: SerializeField] public Slider HealthSlider { get; private set; }
 
     private void Awake()
     {
-        _healthSlider = GetComponent<Slider>();
+        HealthSlider = GetComponent<Slider>();
     }
 
-    public override void DisplayHealth(float currenHealth, float maxHealth)
+    protected override void DisplayHealth(float currenHealth, float maxHealth)
     {
-        _healthSlider.value = currenHealth / maxHealth;
+        HealthSlider.value = currenHealth / maxHealth;
     }
 }

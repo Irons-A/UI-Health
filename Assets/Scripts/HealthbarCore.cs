@@ -14,5 +14,5 @@ public abstract class HealthbarCore : MonoBehaviour
         _health.ValueChanged -= DisplayHealth;
     }
 
-    public abstract void DisplayHealth(float currenHealth, float maxHealth);
+    protected abstract void DisplayHealth(float currenHealth, float maxHealth);
 }
